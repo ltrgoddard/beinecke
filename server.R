@@ -7,7 +7,7 @@ function(input, output) {
 	d <- read.csv("beinecke.csv")
 
 	go <- reactive({
-		s <- d[d$weight > quantile(d$weight, input$weight),]
+		s <- d[d$weight > quantile(d$weight, input$weight / 100),]
 		g <- graph.data.frame(s, directed = FALSE)
 		g <- delete.vertices(g, which(degree(g) < 2))
 		wc <- cluster_walktrap(g)
